@@ -6,3 +6,5 @@ app.get("/ping", (request, response) => {response.json({ status: "ok" });});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+// get files from public folder
+app.use(express.static('public'));
