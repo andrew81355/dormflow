@@ -3,10 +3,76 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dormflow</title>
+        <title>Dormflow - Student Residence Portal</title>
     </head>
     <body>
-        <h1>Welcome to Dormflow</h1>
-        <p> Static files are used from public folder</p>
+        <header class="site-header">
+            <nav class="navbar">
+                <a class="brand" href="/">Dormflow</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/requests.html">Requests</a></li>
+                    <li><a href="/bookings.html">Bookings</a></li>
+                    <li><a href="/announcements.html">Announcements</a></li>
+                    <li><a href="/login.html">Login</a></li>
+                    <li><a href="/register.html">Register</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="hero">
+                <h1>Manage your dorm life in one place</h1>
+                <p>
+                    Dormflow helps students to report maintenace problems
+                    and book shared facilities. Administrators handle requests,
+                    manage rooms and post announcements.
+                </p>
+            </section>
+            <sections class="services">
+                <h2>What you can do</h2>
+                <div class="cards">
+                    <article class="card">
+                        <h3>Report Maintenance Issues</h3>
+                        <p>
+                            Submit a repair request for plumbing, heating, electricity and more, then track its status
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3>Book Shared Facilities</h3>
+                        <p>
+                            Reserve laundry room, study room, gym in free time slots.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <h3>Receive Announcements</h3>
+                        <p>
+                            Receive news and important notices from administration.
+                        </p>
+                    </article>
+                </div>
+            </sections>
+
+            <section class="announcements">
+                <h2>Latest Announcements</h2>
+                <ul class="announcement-list">
+                    <li class="announcement">
+                        <h3>Water shutdown</h3>
+                        <p class="meta">Posted on 10th August 2026</p>
+                        <p>
+                            Water supply will be interrupted on 10th August from 9 AM to 5 PM for maintenance work.
+                        </p>
+                    </li>
+                    <li class="announcement">
+                        <h3>New Gym Equipment</h3>
+                        <p>
+                            New gym equipment has been installed.
+                        </p>
+                    </li>
+                </ul>
+            </section>
+        </main>
+        <footer class="site-footer">
+            <p>Dormflow</p>
+        </footer>
     </body>
 </html>
