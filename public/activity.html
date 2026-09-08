@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Activity - dormflow</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <header class="site-header">
+            <nav class="navbar">
+                <a class="brand" href="/">dormflow</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/requests.html">Requests</a></li>
+                    <li><a href="/bookings.html">Bookings</a></li>
+                    <li><a href="/announcements.html">Announcements</a></li>
+                    <li><a href="/activity.html">Activity</a></li>
+                    <li><a href="/login.html">Login</a></li>
+                    <li><a href="/register.html">Register</a></li>
+
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h1 class="page-title">My Activity</h1>
+
+            <!-- activity list-->
+             <section class="list section">
+                <h2> My requests</h2>
+                <ul class="request-list">
+                    <li class="request">
+                        <div class="request-header">
+                            <h3>Plumbing</h3>
+                            <span class="badge status-reviewed"Reviewed</span>
+                        </div>
+                        <p class="request-meta">Room 204; Priority: high; June 10</p>
+                        <p> Sink in bathroomm is leaking </p>
+                    </li>
+                    <li class="request">
+                        <div class="request-header">
+                            <h3>Heating</h3>
+                            <span class="badge status-submitted">Submitted</span>
+                        </div>
+                        <p class="request-meta">Room 101; Priority: medium; June 9</p>
+                        <p> Heating is not working properly</p>
+                    </li>
+                </ul>
+            </section>
+            <section class="list-section">
+                <h2>Upcoming bookings</h2>
+                <ul class="booking-list">
+                    <li class="booking">
+                        <div class="booking-header">
+                            <h3>Study room</h3>
+                        </div>
+                        <p class="booking-meta">June 15; 10:00 - 11:00</p>
+                    </li>
+                    <li class="booking">
+                        <div class="booking-header">
+                            <h3>Gym room</h3>
+                        </div>
+                        <p class="booking-meta">June 20; 16:00 - 17:00</p>
+                    </li>
+                </ul>
+            </section>
+            <section class="list-section">
+                <h2>Past bookings</h2>
+                <ul class="booking-list">
+                    <li class="booking">
+                        <div class="booking-header">
+                            <h3>Laundry room</h3>
+                        </div>
+                        <p class="booking-meta">June 10; 09:00 - 10:00</p>
+                    </li>
+                    <li class="booking">
+                        <div class="booking-header">
+                            <h3>Common room</h3>
+                        </div>
+                        <p class="booking-meta">June 9; 14:00 - 15:00</p>
+                    </li>
+                </ul>
+            </section>
+            <section class="list-section">
+                <h2>Recent status changes</h2>
+                <ul class="history-list">
+                    <li class="history-item">
+                        <strong>Plumbing (Room 204):</strong> Submitted -"Reviewed"
+                        <p class="meta">Changed by admin; August 10</p>
+                    </li>
+                    <li class="history-item">
+                        <strong>Heating (Room 101):</strong> Reviewed - "In progress"
+                        <p class="meta">Changed by admin; August 11</p>
+                    </li>
+                </ul>
+            </section>
+            </main>
+            <footer class="site-footer">
+                <p>dormflow</p>
+            </footer>
+    </body>
+</html>
