@@ -50,7 +50,7 @@ function renderRequest(request) {
     const meta = document.createElement("p");
     meta.className = 'request-meta';
     const date = new Date(request.createdAt).toLocaleDateString();
-    meta.textContent = "Room ${request.roomNumber} ; Priority: ${request.priority} ; ${date}";
+    meta.textContent = `Room ${request.roomNumber} ; Priority: ${request.priority} ; ${date}`;
     const description = document.createElement("p");
     description.textContent = request.description;
     item.append(header, meta, description);
