@@ -8,6 +8,8 @@ const {
     updateRequest,
     deleteRequest
 } = require('../controllers/requestController');
+const auth = require('../middleware/auth');
+router.use(auth);
 router.get('/', getAllRequests);
 router.post('/', createRequest);
 router.get('/:id', getRequestById);

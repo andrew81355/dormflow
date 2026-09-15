@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const requestRoutes = require('./routes/requestRoutes');
+const authRoutes = require('./routes/authRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
@@ -14,6 +15,7 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 app.use(express.static('public'));
 // verify that server is running(when get on /ping respond with ok)
 app.get("/ping", (request, response) => {response.json({ status: "ok" });});
+app.use('/api/auth', authRoutes);
 app.use('/api/requests', requestRoutes);
 //404 handler
 app.use((req, res, next) => {

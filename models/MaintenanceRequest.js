@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 // a schema for maintenance requests which will be stored in mongoDB
 const maintenanceRequestSchema = new mongoose.Schema(
-    {resident: {type: String, required: true},
+    {resident: {type:mongoose.Schema.Types.ObjectId, ref:'User', required:true
+    },
     roomNumber: {type: String, required: true},
     category: {
         type: String,
