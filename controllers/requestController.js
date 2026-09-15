@@ -1,4 +1,4 @@
-const MaintenanceRequest = require('../models/maintenanceRequest');
+const MaintenanceRequest = require('../models/MaintenanceRequest');
 // create new request
 async function createRequest(req, res, next) {
     try {

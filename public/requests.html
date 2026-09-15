@@ -30,7 +30,11 @@
                 <form class="form" id="request-form">
                     <div class="form-group">
                         <label for="resident">Your name</label>
-                        <input type="text" id="resident" name="resident" required>
+                        <input type="text" id="resident" name="resident" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="roomNumber">Room number</label>
+                        <input type="text" id="roomNumber" name="roomNumber" required />
                     </div>
                     <div class="form-group">
                         <label for="category">Category</label>
@@ -43,46 +47,32 @@
                             <option>Other</option>
                         </select>
                     </div>
+                    <div class ="form-group">
+                        <label for ="priority">Priority</label>
+                        <select id="priority" name="priority" >
+                            <option>Low</option>
+                            <option>Medium</option>
+                            <option>High</option>
+                            <option>Urgent</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea id="description" name="description" rows="3" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit Request</button>
                 </form>
+                <p id="form-message" class="message"></p>
              </section>
              <!-- request list  -->
                 <section class="list section">
                     <h2>All Requests</h2>
-                    <ul class="request-list">
-                        <li class="request">
-                            <div class="request-header">
-                                <h3>Plumbing</h3>
-                                <span class="badge status-submitted">Submitted</span>
-                            </div>
-                            <p class="request-meta">Room 204; Priority: high; June 10</p>
-                            <p> Sink in bathroomm is leaking</p>
-                           
-                        </li>
-                        <li class="request">
-                            <div class="request-header">
-                                <h3>Heating</h3>
-                                <span class="badge status-in-progress">In Progress</span>
-                            </div>
-                            <p class="request-meta">Room 101; Priority: medium; June 9</p>
-                            <p> Heating is not working properly</p>
-                        </li>
-                        <li class="request">
-                            <div class="request-header">
-                                <h3>Internet</h3>
-                                <span class="badge status-completed">Completed</span>
-                            </div>
-                            <p class="request-meta">Room 305; Priority: low; June 8</p>
-                            <p> Internet connection is slow</p>
-                        </li>
-                    </ul>
+                    <ul id="request-list" class="request-list"></ul>
                 </section>
             </main>
             <footer class="site-footer">
                 <p>dormflow</p>
+            </footer>
+            <script src="js/requests.js"></script>
         </body>
 </html>

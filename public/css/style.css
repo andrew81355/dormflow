@@ -170,6 +170,17 @@ card h3 {
 }
 .btn-primary:hover {
     background: var(--primary-dark);
+
+}
+.message {
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+.message.success {
+    color: #166534;
+}
+.message.error {
+    color: #991b1b;
 }
 /* request list */
 .request-list,
@@ -211,7 +222,7 @@ card h3 {
     border-radius: 999px;
     white-space: nowrap;
 }
-.status-submited {
+.status-submitted {
     background: #e2e8f0;
     color: #334155;
 }

@@ -5,7 +5,7 @@ const maintenanceRequestSchema = new mongoose.Schema(
     roomNumber: {type: String, required: true},
     category: {
         type: String,
-        enum: ['Plumbing', 'Electrical', 'Heating', 'Furniture', 'Internet', 'Other'],
+        enum: ['Plumbing', 'Electricity', 'Heating', 'Furniture', 'Internet', 'Other'],
         required: true
     },
     description: {type: String, required: true},
