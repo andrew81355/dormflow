@@ -57,6 +57,10 @@ a:hover {text-decoration: underline;}
     color: var(--primary);
     text-decoration: none;
 }
+.nav-user {
+    color: var(--muted);
+    font-weight: 600;
+}
 /* main content */
 main {
     max-width: 960px;

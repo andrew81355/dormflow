@@ -16,11 +16,19 @@ const maintenanceRequestSchema = new mongoose.Schema(
         default: "Medium"
     },
     status: {type: String,
-        enum: ['Submitted', 'Reviewed', 'In Progress', 'Completed', 'Rejected'],
+        enum: ['Submitted', 'Reviewed', 'In Progress', 'Completed', 'Rejected', 'Cancelled'],
         default: "Submitted"
     },
     adminComment: {type: String, default: ""},
-
+    statusHistory: [
+        {
+            from: String,
+            to: String,
+            changedBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+            changedAt: {type: Date, default: Date.now},
+            comment: String,
+        },
+    ],
     },
     {timestamps: true} // createdAt and updatedAt
 

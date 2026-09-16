@@ -6,7 +6,8 @@ const {
     getAllRequests,
     getRequestById,
     updateRequest,
-    deleteRequest
+    deleteRequest,
+    updateRequestStatus,
 } = require('../controllers/requestController');
 const auth = require('../middleware/auth');
 router.use(auth);
@@ -15,4 +16,5 @@ router.post('/', createRequest);
 router.get('/:id', getRequestById);
 router.put('/:id', updateRequest);
 router.delete('/:id', deleteRequest);
+router.put('/:id/status', updateRequestStatus);
 module.exports = router;
