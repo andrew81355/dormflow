@@ -4,9 +4,8 @@ const list = document.getElementById('request-list');
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
     message.textContent = '';
-    //collect values from form
+    //owner gets from token
     const newRequest = {
-        resident: form.resident.value,
         roomNumber: form.roomNumber.value,
         category: form.category.value,
         priority: form.priority.value,
@@ -16,7 +15,7 @@ form.addEventListener('submit', async (event) => {
     try {
         const response = await fetch('/api/requests', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json', ...authHeaders()},
             body: JSON.stringify(newRequest)
         });
         if (response.ok) {
@@ -59,7 +58,13 @@ function renderRequest(request) {
 // load request from server and show them on the page
 async function loadRequests() {
     try {
-        const response = await fetch('/api/requests');
+        const response = await fetch('/api/requests', {headers: authHeaders()});
+        //if problem with token redirect to login page
+        if (response.status === 401) {
+            clearToken();
+            window.location.href = '/login.html';
+            return;
+        }
         if (!response.ok) {
             list.textContent = 'Could not load requests.';
             return;
@@ -77,4 +82,9 @@ async function loadRequests() {
         list.textContent = 'Error loading requests.';
     }
 }
-loadRequests();
+// check user is log in and load requests or go to login page
+if (!getToken()) {
+    window.location.href = '/login.html';
+} else {
+    loadRequests();
+}
