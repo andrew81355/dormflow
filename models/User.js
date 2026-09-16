@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
             trim: true,
         },
     // select false not to load passwordHash by normal queries
-    passwordHash: {type: String, required, select: false},
+    passwordHash: {type: String, required: true, select: false},
     roomNumber: {type: String},
     role: {
         type: String,

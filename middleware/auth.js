@@ -1,5 +1,5 @@
-const jwt = requitre('jsonwebtoken');
-const user = require('../models/User');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 //it check token from request  and verify it and then add user to request
 // routes usingmiddleware function  to auth user with a valid token
 async function auth(req, res, next) {

@@ -25,7 +25,7 @@ const allowedTransitions = {
 // list all requests
 async function getAllRequests(req, res, next) {
     try {
-        const filt = req.user.role =req.user.role === 'admin' ? {} : { resident: req.user._id };
+        const filt = req.user.role === 'admin' ? {} : { resident: req.user._id };
         const requests = await MaintenanceRequest.find(filt).sort({ createdAt: -1 });
         
         res.json(requests);
@@ -40,7 +40,7 @@ async function getRequestById(req, res, next) {
         if (!request) {
             return res.status(404).json({ message: 'Request not found' });
         }
-        IF (!canAccess(req.user, request)) {
+        if (!canAccess(req.user, request)) {
             return res.status(403).json({error: 'you can open only your own requests'});
         }
         res.json(request);
@@ -105,10 +105,6 @@ async function updateRequestStatus(req, res, next) {
     if (!request) {
         return res.status(404).json({error: 'Request not found'});
     }
-    const request = await MaintenanceRequest.findById(req.params.id);
-    if (!request) {
-        return res.status(404).json({error: 'Request not found'});
-    }
     const isAdmin = req.user.role === 'admin';
     const isOwner = request.resident.equals(req.user._id);
     // student can cancel his own request if it cancelled or submitted and admin can changes statuses of request
@@ -121,7 +117,7 @@ async function updateRequestStatus(req, res, next) {
         return res.status(400).json({error: `wrong status changes from ${request.status} to ${status}`});
     }
     // add history entry , 1 is fromstatus 2 is to status 3 is who changed it 4 is comment 5 is date
-    const hisstoryEntry = {
+    const historyEntry = {
         from: request.status,
         to: status,
         changedBy: req.user._id,

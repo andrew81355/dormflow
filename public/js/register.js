@@ -13,7 +13,7 @@ try {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
             name: registerForm.elements.name.value,
-            emil,
+            email,
             roomNumber: registerForm.elements.roomNumber.value,
             password,
         }),

@@ -32,6 +32,8 @@ async function showCurrentUser (){
     // remove login and register links
     navLinks.querySelectorAll('a[href="/login.html"], a[href="/register.html"]').forEach(link => link.parentElement.remove());
     const userItem = document.createElement('li');
+    userItem.textContent = user.name;
+    const logoutItem = document.createElement('li');
     const logoutLink = document.createElement('a');
     logoutLink.href = '#';
     logoutLink.textContent = 'Logout';
