@@ -26,8 +26,35 @@ const allowedTransitions = {
 async function getAllRequests(req, res, next) {
     try {
         const filt = req.user.role === 'admin' ? {} : { resident: req.user._id };
-        const requests = await MaintenanceRequest.find(filt).sort({ createdAt: -1 });
+        const { status, category, priority, roomNumber, q, page, limit } = req.query;
+        if (status) {
+            filter.status = status;
+        }
+        if (category) {
+            filter.category = category;
+        }
+        if (priority) {
+            filter.priority = priority;
+        }
+        if (roomNumber) {
+            filter.roomNumber = roomNumber;
+        }
+        if (q) {
+            const safe = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            filter.$or = [
+                { description: { $regex: safe, $options: 'i' } },
+                { roomNumber: { $regex: safe, $options: 'i' } },
+            ];
+        }
         
+        
+        const query = MaintenanceRequest.find(filter).populate('statusHistory.changedBy', 'name').sort({ createdAt: -1 });
+        const perPage = Number(limit)
+        if (perPage > 0) {
+            const currentPage = Number(page) > 0 ? Number(page) : 1;
+            query.skip((currentPage - 1) * perPage).limit(perPage);
+        }
+        const requests = await query;
         res.json(requests);
     } catch (err) {
         next(err);
