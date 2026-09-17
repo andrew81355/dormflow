@@ -176,6 +176,18 @@ card h3 {
     background: var(--primary-dark);
 
 }
+.btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    margin-top: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+.btn-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
 .message {
     margin-top: 10px;
     font-size: 0.95rem;
@@ -188,13 +200,15 @@ card h3 {
 }
 /* request list */
 .request-list,
-.booking-list {
+.booking-list,
+.facility-list {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 .request,
-.booking {
+.booking,
+.facility {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -209,11 +223,13 @@ card h3 {
     gap: 12px;
 }
 .request-header h3,
-.booking-header h3 {
+.booking-header h3,
+.facility h3 {
     margin: 0;
 }
-.request .meta,
-.booking .meta {
+.request-meta,
+.booking-meta,
+.facility-meta {
     color: var(--muted);
     font-size: 0.9rem;
     margin: 4px 0 8px;
