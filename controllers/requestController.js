@@ -25,7 +25,7 @@ const allowedTransitions = {
 // list all requests
 async function getAllRequests(req, res, next) {
     try {
-        const filt = req.user.role === 'admin' ? {} : { resident: req.user._id };
+        const filter = req.user.role === 'admin' ? {} : { resident: req.user._id };
         const { status, category, priority, roomNumber, q, page, limit } = req.query;
         if (status) {
             filter.status = status;
@@ -65,7 +65,7 @@ async function getRequestById(req, res, next) {
     try {
         const request = await MaintenanceRequest.findById(req.params.id);
         if (!request) {
-            return res.status(404).json({ message: 'Request not found' });
+            return res.status(404).json({ error: 'Request not found' });
         }
         if (!canAccess(req.user, request)) {
             return res.status(403).json({error: 'you can open only your own requests'});
@@ -80,11 +80,15 @@ async function updateRequest(req, res, next) {
     try{
         const request = await MaintenanceRequest.findById(req.params.id);
         if (!request) {
-            return res.status(404).json({ error: 'Requst not found' });
+            return res.status(404).json({ error: 'Request not found' });
 
         }
         if (!canAccess(req.user, request)) {
             return res.status(403).json({error: 'you can update only your own requests'});
+        }
+        // student can change only a request that is not taken into work yet
+        if (req.user.role !== 'admin' && request.status !== 'Submitted') {
+            return res.status(400).json({ error: 'Only submitted requests can be changed' });
         }
         const {roomNumber, category, description, priority} = req.body;
         const updates = {roomNumber, category, description, priority};
@@ -109,11 +113,15 @@ async function deleteRequest(req, res, next) {
     try {
         const request = await MaintenanceRequest.findById(req.params.id);
         if (!request) {
-            return res.status(404).json({ message: 'Request not found' });
+            return res.status(404).json({ error: 'Request not found' });
         }
         if (!canAccess(req.user, request)) {
             return res.status(403).json({error: 'you can delete only your own requests'});
         } 
+        // student can change only a request that is not taken into work yet
+        if (req.user.role !== 'admin' && request.status !== 'Submitted') {
+            return res.status(400).json({ error: 'Only submitted requests can be changed' });
+        }
         await request.deleteOne();
         res.json({ message: 'Request deleted successfully' });
     } catch (err) {

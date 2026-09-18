@@ -38,7 +38,7 @@ async function loadFacilities() {
         const meta = document.createElement('p');
         meta.className = 'facility-meta';
         const price = facility.pricePerSlot > 0 ? '€' + facility.pricePerSlot : 'free';
-        meta.textContent = `${facility.location || '—'} • up to ${facility.capacity} • ${facility.slotMinutes} min slot • ${price}`;
+        meta.textContent = `${facility.location || '—'} • whole room, up to ${facility.capacity} people • ${facility.slotMinutes} min slot • ${price}`;
         item.append(title, meta);
         if (facility.description) {
             const description = document.createElement('p');

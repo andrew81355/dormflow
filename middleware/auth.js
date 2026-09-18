@@ -6,7 +6,7 @@ async function auth(req, res, next) {
     const header = req.headers.authorization;
     // header "Beared <token>" requiterd for authorization
     if (!header || !header.startsWith('Bearer ')) {
-        return res.status(401).json({error: 'Unathorized'});
+        return res.status(401).json({error: 'Unauthorized'});
     }
     const token = header.split(" ")[1];
     let decoded;

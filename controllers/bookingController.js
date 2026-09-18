@@ -1,4 +1,5 @@
 const Booking = require('../models/Booking');
+const Facility = require('../models/Facility');
 function canAccess(user, booking) {
     return user.role === 'admin' || booking.userId.equals(user._id);
 }
@@ -22,6 +23,14 @@ async function createBooking(req, res, next) {
         if (start < new Date()) {
             return res.status(400).json({ error: 'Cannot book a time in the past' });
         }
+        // facility must exist and be open for booking
+        const facility = await Facility.findById(facilityId);
+        if (!facility) {
+            return res.status(404).json({ error: 'Facility not found' });
+        }
+        if (!facility.available) {
+            return res.status(400).json({ error: 'This facility is not available for booking' });
+        }
         const overlapping = await Booking.findOne({
             facilityId,
             status: 'Active',
@@ -35,6 +44,10 @@ async function createBooking(req, res, next) {
         res.status(201).json(booking);
 
     } catch (err) {
+        // 11000 duplicate key error in mongoose, when 2 at 1 time, database will let 1
+        if (err.code === 11000) {
+            return res.status(409).json({ error: 'This time slot is already booked' });
+        }
         next(err);
     }
 }
@@ -55,7 +68,7 @@ async function getBookingById(req, res, next) {
     try {
         const booking = await Booking.findById(req.params.id).populate('facilityId', 'name location pricePerSlot');
         if (!booking) {
-            return res.status(404).json({ message: 'Booking not found' });
+            return res.status(404).json({ error: 'Booking not found' });
         }
         if (!canAccess(req.user, booking)) {
             return res.status(403).json({ error: 'you can open only your own bookings' });
@@ -63,10 +76,6 @@ async function getBookingById(req, res, next) {
 
         res.json(booking);
     } catch (err) {
-        // 11000 duplicate key error in mongoose, when 2 at 1 time, database will let 1
-        if (err.code === 11000) {
-            return res.status(409).json({ error: 'This time slot is already booked' });
-        }
         next(err);
     }
 }
@@ -75,7 +84,7 @@ async function cancelBooking(req, res, next) {
     try {
         const booking = await Booking.findById(req.params.id);
         if (!booking) {
-            return res.status(404).json({ message: 'Booking not found' });
+            return res.status(404).json({ error: 'Booking not found' });
         }
 
         if (!canAccess(req.user, booking)) {

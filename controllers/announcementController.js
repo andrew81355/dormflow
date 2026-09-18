@@ -13,7 +13,7 @@ async function getAnnouncementById(req, res, next) {
     try {
         const announcement = await Announcement.findById(req.params.id).populate('createdBy', 'name');
         if (!announcement) {
-            return res.status(404).json({ message: 'Announcement not found' });
+            return res.status(404).json({ error: 'Announcement not found' });
         }
         res.json(announcement);
     } catch (err) {
@@ -38,7 +38,7 @@ async function updateAnnouncement(req, res, next) {
     try {
         const announcement = await Announcement.findById(req.params.id);
         if (!announcement) {
-            return res.status(404).json({ message: 'Announcement not found' });
+            return res.status(404).json({ error: 'Announcement not found' });
         }
         const { title, content, category } = req.body;
         const updates = { title, content, category };
@@ -60,7 +60,7 @@ async function deleteAnnouncement(req, res, next) {
     try {
         const announcement = await Announcement.findById(req.params.id);
         if (!announcement) {
-            return res.status(404).json({ message: 'Announcement not found' });
+            return res.status(404).json({ error: 'Announcement not found' });
         }
         await announcement.deleteOne();
         res.json({ message: 'Announcement deleted successfully' });

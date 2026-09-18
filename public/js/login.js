@@ -6,7 +6,7 @@ loginForm.addEventListener('submit', async (event) => {
     loginMessage.textContent = '';
     // send request to servver with email and pass
     try {
-        const response = await fetch('api/auth/login', {
+        const response = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

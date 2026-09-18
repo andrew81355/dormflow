@@ -34,4 +34,6 @@ bookingSchema.index(
     { facilityId: 1, startAt: 1 },
     { unique: true, partialFilterExpression: { status: 'Active' } }
 );
+// index for my bookings
+bookingSchema.index({ userId: 1, startAt: -1 });
 module.exports = mongoose.model('Booking', bookingSchema);

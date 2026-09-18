@@ -1,0 +1,13 @@
+# installed inside the image by npm ci, never copied from host
+node_modules
+npm-debug.log
+
+# secrets must stay out of the image
+.env
+
+# not needed to run the server
+.git
+.gitignore
+Dockerfile
+.dockerignore
+README.md

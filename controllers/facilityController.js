@@ -15,7 +15,7 @@ async function getFacilityById(req, res, next) {
         const facility = await Facility.findById(req.params.id);
 
         if (!facility) {
-            return res.status(404).json({ message: 'Facility not found' });
+            return res.status(404).json({ error: 'Facility not found' });
         }
 
         res.json(facility);
@@ -55,7 +55,7 @@ async function updateFacility(req, res, next) {
         const facility = await Facility.findById(req.params.id);
 
         if (!facility) {
-            return res.status(404).json({ message: 'Facility not found' });
+            return res.status(404).json({ error: 'Facility not found' });
         }
 
         const { name, description, location, capacity, available, slotMinutes, pricePerSlot } = req.body;
@@ -84,7 +84,7 @@ async function deleteFacility(req, res, next) {
         const facility = await Facility.findById(req.params.id);
 
         if (!facility) {
-            return res.status(404).json({ message: 'Facility not found' });
+            return res.status(404).json({ error: 'Facility not found' });
         }
 
         await facility.deleteOne();

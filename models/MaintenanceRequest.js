@@ -33,4 +33,8 @@ const maintenanceRequestSchema = new mongoose.Schema(
     {timestamps: true} // createdAt and updatedAt
 
 );
+// admin list by status
+maintenanceRequestSchema.index({ status: 1, createdAt: -1 });
+// my requests
+maintenanceRequestSchema.index({ resident: 1, createdAt: -1 });
 module.exports = mongoose.model('MaintenanceRequest', maintenanceRequestSchema);

@@ -8,6 +8,14 @@ async function register(req, res, next) {
         if (!name || !email || !password) {
             return res.status(400).json({error:'Name, email and password are required'});
     }
+    // simple email check
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email.trim())) {
+        return res.status(400).json({ error: 'Email format is not valid' });
+    }
+    if (password.length < 8) {
+        return res.status(400).json({ error: 'Password must be at least 8 characters long' });
+    }
     const existing = await User.findOne({email:email.toLowerCase().trim()});
     if (existing) {
         return res.status(400).json({error:'Email already in use'});

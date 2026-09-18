@@ -112,8 +112,8 @@ async function loadActivity() {
     if (bookingsResponse.ok) {
         const bookings = await bookingsResponse.json();
         const now = new Date();
-        const upcoming = bookings.filter((booking) => new Date(booking.startAt) > now);
-        const past = bookings.filter((booking) => new Date(booking.endAt) < now);
+        const upcoming = bookings.filter((booking) => new Date(booking.endAt) > now);
+        const past = bookings.filter((booking) => new Date(booking.endAt) <= now);
         upcomingBookings.textContent = '';
         if (upcoming.length === 0) {
             showEmpty(upcomingBookings, 'No upcoming bookings.');

@@ -1,11 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const requestRoutes = require('./routes/requestRoutes');
 const authRoutes = require('./routes/authRoutes');
 const facilityRoutes = require('./routes/facilityRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const announcementRoutes = require('./routes/announcementRoutes');
+const errorHandler = require('./middleware/errorHandler');
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
@@ -15,7 +17,7 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 }).catch((error) => 
   console.error("Error connecting to MongoDB:", error));
 // get files from public folder
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 // verify that server is running(when get on /ping respond with ok)
 app.get("/ping", (request, response) => {response.json({ status: "ok" });});
 app.use('/api/auth', authRoutes);
@@ -27,10 +29,7 @@ app.use('/api/announcements', announcementRoutes);
 app.use((req, res, next) => {
   res.status(404).json({ error: "Not Found" });
 });
-app.use((error, request, response, next) => {
-  console.error(error.stack);
-  response.status(500).json({ error: "Internal Server Error" });
-});
+app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
