@@ -5,6 +5,7 @@ const User = require('./models/User');
 const MaintenanceRequest = require('./models/MaintenanceRequest');
 const Facility = require('./models/Facility');
 const Booking = require('./models/Booking');
+const Announcement = require('./models/Announcement');
 // demo data for project
 function todayAt(hour) {
     const date = new Date();
@@ -23,6 +24,7 @@ async function seed() {
         MaintenanceRequest.deleteMany({}),
         Facility.deleteMany({}),
         Booking.deleteMany({}),
+        Announcement.deleteMany({}),
     ]);
     console.log('Old data removed');
     const passwordHash = await bcrypt.hash('password123', 10);
@@ -243,6 +245,21 @@ async function seed() {
         },
     ]);
     console.log('Bookings created');
+    await Announcement.create([
+        {
+            title: 'Water shutdown on Friday',
+            content: 'Cold water will be off from 9:00 to 13:00 for scheduled maintenance. Please store some water in advance.',
+            category: 'Maintenance',
+            createdBy: admin._id,
+        },
+        {
+            title: 'New gym opening hours',
+            content: 'The gym room is now open from 7:00 to 23:00 every day.',
+            category: 'Facilities',
+            createdBy: admin._id,
+        },
+    ]);
+    console.log('Announcements created: 2');
     console.log('\nDemo accounts (password for all: password123)');
     console.log('  admin@dormflow.test   (admin)');
     console.log('  andrei@dormflow.test  (student, room 204)');

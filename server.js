@@ -5,6 +5,7 @@ const requestRoutes = require('./routes/requestRoutes');
 const authRoutes = require('./routes/authRoutes');
 const facilityRoutes = require('./routes/facilityRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
+const announcementRoutes = require('./routes/announcementRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/facilities', facilityRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/announcements', announcementRoutes);
 //404 handler
 app.use((req, res, next) => {
   res.status(404).json({ error: "Not Found" });
